@@ -10,8 +10,6 @@ import MainMenu from './components/MainMenu.vue'
 </template>
 
 <script>
-import firebase from 'firebase/compat/app';
-import { ref } from 'vue';
 
 export default {
   components: { MainMenu, RouterView },

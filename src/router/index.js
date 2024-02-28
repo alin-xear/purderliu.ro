@@ -3,11 +3,19 @@ import HomeView from '../views/HomeView.vue'
 import firebase from 'firebase/compat/app';
 
 const requireAuth = (to, from, next) => {
-  firebase.auth().onAuthStateChanged( user =>{
-    if(!user) {
-      next({name: 'login'})
-    }else {
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      next({ name: 'login' })
+    } else {
       next()
+    }
+  })
+}
+
+const allreadyAuthentificated = (to, from, next) => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      next({ name: 'home' })
     }
   })
 }
@@ -23,17 +31,22 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/LogIn.vue')
+      component: () => import('../views/LogIn.vue'),
+      beforeEnter: allreadyAuthentificated
+
     },
     {
       path: '/add-project',
       name: 'AddProject',
-      component: ()=> import('../views/AddProject.vue'),
+      component: () => import('../views/AddProject.vue'),
       beforeEnter: requireAuth
-    }
+    },
+    {
+      path: '/projects/:id',
+      name: 'Projects',
+      component: () => import('../views/ProjectView.vue'),
+      props: true
+    },
   ]
 })
 

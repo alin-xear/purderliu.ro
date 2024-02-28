@@ -49,14 +49,6 @@ export default {
 </script>
 
 
-<style scoped>
-.loginWrap {
-  padding-top: 200px;
-  text-align: center;
-}
-input {
-  padding: 8px 12px;
-  display: block;
-  width: 100%;
-}
+<style >
+
 </style>

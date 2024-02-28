@@ -7,7 +7,7 @@ const getProjects = () => {
   const load = async () => {
     try {
       const res = await projectFirestore.collection('projects')
-      .orderBy('created_at', 'desc')
+      .orderBy('created_at', 'asc')
       .get()
 
       if(!res.size > 0 ){
@@ -26,6 +26,3 @@ const getProjects = () => {
 }
 
 export default getProjects
-
-
-
