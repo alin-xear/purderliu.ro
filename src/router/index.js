@@ -16,6 +16,8 @@ const allreadyAuthentificated = (to, from, next) => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       next({ name: 'home' })
+    }else{
+      next()
     }
   })
 }

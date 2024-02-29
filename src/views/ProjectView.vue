@@ -1,23 +1,29 @@
 <template>
-<div>
-  <div v-if="error">{{ error }}</div>
+  <div>
+    <div v-if="error">{{ error }}</div>
 
-  <div v-if="project">
-    
-    <ProjectHeader :project=project />
+    <div v-if="project">
+      <ProjectHeader :project="project" />
+      <ProjectImages :images="project.images" />
+    </div>
+    <div v-else>
+      <Spinner />
+    </div>
 
-    
-  </div>
-  <div v-else>Loading project...</div>
+    <MainFooter />
   </div>
 </template>
 
 <script>
 import { useRoute } from "vue-router";
 import getProject from "../composables/getProject";
-import ProjectHeader from "../components/ProjectHeader.vue"
+import Spinner from "../components/Spinner.vue";
+import ProjectHeader from "../components/ProjectHeader.vue";
+import ProjectImages from "../components/ProjectImages.vue";
+import MainFooter from "../components/MainFooter.vue";
+
 export default {
-  components: { ProjectHeader },
+  components: { ProjectHeader, MainFooter, ProjectImages, Spinner },
   setup() {
     const route = useRoute();
     const id = route.params.id;

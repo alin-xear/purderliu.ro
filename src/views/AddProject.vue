@@ -21,32 +21,112 @@
           <p>
             Current tags
             <small class="fst-italic">(click item to remove)</small>:
-            <br>
+            <br />
             <span class="tag" v-for="tag in tags" :key="tag" @click="removeTag">
               {{ tag }}
             </span>
           </p>
-          <input
-            type="text"
-            v-model="tempImg"
-            placeholder="Input image url and press enter"
-            @keydown.enter.prevent="addImage"
-          />
-          <p>
-            Current images
-            <small class="fst-italic">(click item to remove)</small>:
-            <br>
-            <span
-              class="tag"
-              v-for="image in images"
-              :key="image"
-              @click="removeImage()"
-            >
-              {{ image }} <br>
-            </span>
-          </p>
+
+          <hr />
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="d-flex"></div>
+              <input
+                type="text"
+                v-model="tempImgSrc"
+                placeholder="Image url"
+              />
+
+              <div class="d-flex justify-content-around">
+
+                <div class="form-group">
+                  <label for="list">List</label>
+                  <input
+                    type="radio"
+                    id="list"
+                    v-model="tempImgType"
+                    name="tempImgType"
+                    value="list"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="landscape">Landscape</label>
+                  <input
+                    type="radio"
+                    id="landscape"
+                    v-model="tempImgType"
+                    name="tempImgType"
+                    value="landscape"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="logo">Logo</label>
+                  <input
+                    type="radio"
+                    id="logo"
+                    v-model="tempImgType"
+                    name="tempImgType"
+                    value="logo"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="square">Square</label>
+                  <input
+                    type="radio"
+                    id="square"
+                    v-model="tempImgType"
+                    name="tempImgType"
+                    value="square"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="square-small">Square small</label>
+                  <input
+                    type="radio"
+                    id="square-small"
+                    v-model="tempImgType"
+                    name="tempImgType"
+                    value="square small"
+                  />
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-12 col-md-6">
+              <button @click.prevent="addImage">Add image</button>
+            </div>
+
+            <div class="col-12">
+              
+              <p class="mt-3">
+                Current images
+                <small class="fst-italic">(click item to remove)</small>:
+                <br />
+                <pre
+                  class="tag"
+                  v-for="image in images"
+                  :key="image"
+                  @click="removeImage()"
+                >
+                  {{ image }} <br />
+                </pre>
+              </p>
+            </div>
+          </div>
+
+          <hr />
 
           <button type="submit">Add project</button>
+          <br />
+          <br />
+          <br />
           <br />
         </form>
       </div>
@@ -67,7 +147,8 @@ export default {
     const tags = ref([]);
     const images = ref([]);
     const tempTag = ref("");
-    const tempImg = ref("");
+    const tempImgType = ref("");
+    const tempImgSrc = ref("");
 
     const handleCreate = async () => {
       const newProject = {
@@ -82,17 +163,21 @@ export default {
 
       await projectFirestore.collection("projects").add(newProject);
 
-      alert("Successfully added project")
-      
-window.location.href = window.location.href;
+      alert("Successfully added project");
 
+      window.location.href = window.location.href;
     };
 
     const addImage = () => {
-      if (!images.value.includes(tempImg.value) && tempImg.value != "") {
-        images.value.push(tempImg.value);
-      }
-      tempImg.value = "";
+      let newImg = {
+        type: tempImgType.value,
+        src: tempImgSrc.value,
+      };
+
+      images.value.push(newImg);
+
+      tempImgType.value = "";
+      tempImgSrc.value = "";
     };
 
     const addTag = () => {
@@ -104,12 +189,14 @@ window.location.href = window.location.href;
 
     const removeTag = (e) => {
       let index = tags.value.indexOf(e.target.innerText);
-      tags.value.splice(index, 1)
+      tags.value.splice(index, 1);
     };
 
     const removeImage = () => {
-      let index = images.value.indexOf(event.target.innerText.replace(/\s/, ""));
-      images.value.splice(index, 1)
+      let index = images.value.indexOf(
+        event.target.innerText.replace(/\s/, "")
+      );
+      images.value.splice(index, 1);
     };
 
     return {
@@ -118,7 +205,8 @@ window.location.href = window.location.href;
       status,
       url,
       tempTag,
-      tempImg,
+      tempImgType,
+      tempImgSrc,
       tags,
       images,
       handleCreate,
@@ -134,6 +222,9 @@ window.location.href = window.location.href;
 <style scoped>
 input {
   margin-bottom: 30px;
+}
+label {
+  cursor: pointer;
 }
 .tag {
   display: inline-block;
