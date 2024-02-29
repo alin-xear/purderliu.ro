@@ -1,38 +1,28 @@
 <template>
   <section>
     <div class="container px-md-5 gridImages">
-
-    
-    <div v-for="image in computedImages" :key="image" :class="image.type">
-
-          <img :src="'../src/assets/' + image.src" class="img-fluid" />
-
-    </div>
-
-   
-    
-    
+      <div v-for="image in computedImages" :key="image" :class="image.type">
+        <img :src="'../'+image.src" class="img-fluid" />
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 export default {
   props: ["images"],
   setup(props) {
-    const computedImages = ref([]) 
+    const computedImages = ref([]);
 
-    computedImages.value = props.images.filter(image => {
-      if(image.type != 'logo' && image.type != 'list'){
-        return true
+    computedImages.value = props.images.filter((image) => {
+      if (image.type != "logo" && image.type != "list") {
+        return true;
       }
-    })
+    });
 
-    console.log(computedImages);
-
-    return { computedImages }
-  }
+    return { computedImages };
+  },
 };
 </script>
 
@@ -44,18 +34,18 @@ export default {
 }
 
 .landscape {
- grid-column: span 6;
+  grid-column: span 6;
 }
 
 .square {
- grid-column: span 3;
+  grid-column: span 3;
 }
 
-img{
+img {
   width: 100%;
 }
 
-.square.small{
- grid-column: span 2;
+.square.small {
+  grid-column: span 2;
 }
 </style>

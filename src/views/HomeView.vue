@@ -1,71 +1,20 @@
 
 <template>
   <MainHeader />
+  <ProjectList :projects=projects :error=error />
 
-  <section class="projects">
-    <div class="container px-md-5">
-      <div v-if="error">{{ error }}</div>
 
-      <masonry-wall
-        :items="projects"
-        :ssr-columns="4"
-        :max-columns="4"
-        :column-width="200"
-        :gap="30"
-      >
-        <template #default="{ item }">
-            <RouterLink
-              :to="{ name: 'Projects', params: { id: item.id } }"
-              class="project"
-            >
-              <img
-                :src="'./src/assets/' + item.images[0].src"
-                :alt="item.title"
-                class="img-fluid"
-              />
-              <div class="proj-title">{{ item.title }}</div>
-              <div class="categ">
-                <span v-for="tag in item.tags" :key="tag">
-                  {{ tag }}
-                </span>
-              </div>
-            </RouterLink>
-        </template>
-      </masonry-wall>
-
-      <!-- <div class="projectsWrap" v-if="projects.length">
-        
-          <RouterLink
-            :to="{ name: 'Projects', params: { id: project.id } }"
-            class="project"
-            v-for="project in projects"
-            :key="project.id"
-          >
-            <img
-              :src="'./src/assets/' + project.images[0].src"
-              :alt="project.title"
-              class="img-fluid"
-            />
-            <div class="proj-title">{{ project.title }}</div>
-            <div class="categ">
-              <span v-for="tag in project.tags" :key="tag">
-                {{ tag }}
-              </span>
-            </div>
-          </RouterLink>
-      </div> -->
-    </div>
-  </section>
 
 </template>
 
 
 <script>
 import MainHeader from "../components/MainHeader.vue";
+import ProjectList from "../components/ProjectList.vue";
 import getProjects from "../composables/getProjects";
 
 export default {
-  components: { MainHeader },
+  components: { MainHeader, ProjectList },
   setup() {
     const { projects, error, load } = getProjects();
 
