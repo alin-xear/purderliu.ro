@@ -14,9 +14,15 @@
       <div class="menuItems" :class="{ active: isOpenMenu }">
         <div class="close" @click="handleMenuClick">&times;</div>
         <ul class="list-unstyled">
-          <li><a href="index.html">HOME</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li>
+            <RouterLink :to="{ name: 'home' }">HOME</RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ name: 'about' }">ABOUT</RouterLink>
+          </li>
+          <li>
+            <RouterLink :to="{ name: 'contact' }">CONTACT</RouterLink>
+          </li>
           <li v-if="isLoggedIn">
             <a href="javascript:void(0)" @click="handleLogout">Log out</a>
           </li>
@@ -27,7 +33,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import useLogout from "../composables/useLogout";
 import firebase from "firebase/compat/app";
 import { useRouter } from "vue-router";
@@ -38,6 +44,7 @@ export default {
     const isOpenMenu = ref(false);
     const router = useRouter();
     const isLoggedIn = ref(false);
+    const menuItems = ref('');
 
     const handleMenuClick = () => {
       isOpenMenu.value = !isOpenMenu.value;
@@ -50,18 +57,25 @@ export default {
       if (!error.value) {
         router.push({ name: "home" });
         isLoggedIn.value = false;
-        handleMenuClick()
+        handleMenuClick();
         console.log("User logged out and redirected to home");
-
       }
     };
-
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         isLoggedIn.value = true;
       }
     });
+
+    onMounted(()=>{
+      const menuItems = document.querySelector('.menuItems').querySelectorAll('a');
+      menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+        handleMenuClick();
+      })
+      })
+    })
 
     return { isOpenMenu, handleMenuClick, handleLogout, isLoggedIn };
   },

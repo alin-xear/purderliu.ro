@@ -13,7 +13,7 @@
         :column-width="200"
         :gap="30"
       >
-        <template #default="{ item, index }">
+        <template #default="{ item }">
             <RouterLink
               :to="{ name: 'Projects', params: { id: item.id } }"
               class="project"
@@ -57,17 +57,15 @@
     </div>
   </section>
 
-  <MainFooter />
 </template>
 
 
 <script>
 import MainHeader from "../components/MainHeader.vue";
-import MainFooter from "../components/MainFooter.vue";
 import getProjects from "../composables/getProjects";
 
 export default {
-  components: { MainHeader, MainFooter },
+  components: { MainHeader },
   setup() {
     const { projects, error, load } = getProjects();
 

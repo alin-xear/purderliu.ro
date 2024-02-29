@@ -7,12 +7,15 @@ import MainMenu from './components/MainMenu.vue'
    <MainMenu />
 
   <RouterView />
+  
+  <MainFooter />
 </template>
 
 <script>
+import MainFooter from "./components/MainFooter.vue";
 
 export default {
-  components: { MainMenu, RouterView },
+  components: { MainMenu, RouterView, MainFooter },
   setup() {
     
 

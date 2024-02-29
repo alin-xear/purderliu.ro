@@ -10,7 +10,6 @@
       <Spinner />
     </div>
 
-    <MainFooter />
   </div>
 </template>
 
@@ -20,10 +19,9 @@ import getProject from "../composables/getProject";
 import Spinner from "../components/Spinner.vue";
 import ProjectHeader from "../components/ProjectHeader.vue";
 import ProjectImages from "../components/ProjectImages.vue";
-import MainFooter from "../components/MainFooter.vue";
 
 export default {
-  components: { ProjectHeader, MainFooter, ProjectImages, Spinner },
+  components: { ProjectHeader, ProjectImages, Spinner },
   setup() {
     const route = useRoute();
     const id = route.params.id;
