@@ -2,7 +2,7 @@
   <section>
     <div class="container px-md-5 gridImages">
       <div v-for="image in computedImages" :key="image" :class="image.type">
-        <img :src="'../'+image.src" class="img-fluid" />
+        <img :src="'../assets/'+image.src" class="img-fluid" />
       </div>
     </div>
   </section>

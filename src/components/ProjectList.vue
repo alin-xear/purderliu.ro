@@ -16,7 +16,7 @@
             class="project"
           >
             <img
-              :src="item.images[0].src"
+              :src="'assets/'+item.images[0].src"
               :alt="item.title"
               class="img-fluid"
             />

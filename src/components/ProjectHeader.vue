@@ -4,7 +4,7 @@
   <header class="projectHeader">
       <div class="container-fluid px-md-5 text-center">
         <img
-          :src="'../'+project.images[1].src"
+          :src="'../assets/'+project.images[1].src"
           :alt="project.title"
           class="logo"
         />
