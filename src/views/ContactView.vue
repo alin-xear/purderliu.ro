@@ -1,6 +1,6 @@
 <template>
     <header class="mainHeader aboutHeader">
-    <img src="../assets/images/header.jpg" width="100%" alt="">
+  <img src="../../public/assets/images/header.jpg" width="100%" alt="">
     <div class="content">
       <div class="container text-center">
 

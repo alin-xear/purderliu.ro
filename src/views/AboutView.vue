@@ -1,10 +1,10 @@
 <template>
     <header class="mainHeader aboutHeader">
-    <img src="../assets/images/header.jpg" width="100%" alt="">
+  <img src="../../public/assets/images/header.jpg" width="100%" alt="">
     <div class="content">
       <div class="container text-center">
 
-        <img src="../assets/images/about-logo.png" alt="About me" width="200" class="logo img-fluid">
+        <img src="../../public/assets/images/about-logo.png" alt="About me" width="200" class="logo img-fluid">
 
         <h1 class="kottario mt-5">About me</h1>
 
