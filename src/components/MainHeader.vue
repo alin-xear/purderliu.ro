@@ -1,6 +1,13 @@
 <template>
   <header class="mainHeader" :class="{active: isActiveMainHeader}">
-  <img src="./assets/images/header.jpg" width="100%" alt="">
+    <br>
+    <br>
+    <br>
+  <img src="../../public/assets/images/header.jpg" width="100%" alt="">
+    <br>
+    <br>
+    <br>
+    <br>
   <div class="content">
     <div class="container">
       <div class="position-relative text-center">
